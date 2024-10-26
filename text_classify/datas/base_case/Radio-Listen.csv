@@ -1,0 +1,32 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+想 听嘉雯 7 点半 的 全新 动力	7	0	Radio-Listen	Alarm-Update
+继续 播 陈健光 的 平凡 的 故事	7	1	Radio-Listen	Audio-Play
+帮 我 调到 吕鲁波 的 小说 连播	7	1	Radio-Listen	Audio-Play
+有 一个 WBS 的 作业 你 写 了 吗 项目管理 的	7	3	Radio-Listen	FilmTele-Play
+接着 拨 拨 到 FM105 点 8 那儿 听 摩登 1058	7	3	Radio-Listen	FilmTele-Play
+咽喉 疼痛 可以 吃 西瓜霜 润喉片 吗	7	3	Radio-Listen	FilmTele-Play
+本报讯 记者 徐力 一直 坚称 以 写作 煳 口 的 韩寒 最近 又 开始 不务正业 了	7	3	Radio-Listen	FilmTele-Play
+FM104 点 3 走进 博洋快 帮 我 放 一下	7	3	Radio-Listen	FilmTele-Play
+放余玉婷 的 思念 是 一种 病来 听	7	3	Radio-Listen	FilmTele-Play
+野史 下酒 就 恶霸 波 那个 播出 一下	7	3	Radio-Listen	FilmTele-Play
+算百润 股份 当前 的 成交额	7	3	Radio-Listen	FilmTele-Play
+接着 上次 的 好 口才 都 不仅 靠 训练 而 来	7	3	Radio-Listen	FilmTele-Play
+给 找 下 蓝天 的 风靡 空间 我 想 听	7	3	Radio-Listen	FilmTele-Play
+放言 研的 好 用 分享	7	3	Radio-Listen	FilmTele-Play
+现在 给 我 放 一下 痛苦 与 热爱	7	3	Radio-Listen	FilmTele-Play
+开开 FM104.1 的 早安 交广 ， 看看 有没有 堵车	7	4	Radio-Listen	HomeAppliance-Control
+播放 959 年代 音乐 怀旧 好 声音	7	5	Radio-Listen	Music-Play
+加祺 的 好友 运动 营找 一下	7	5	Radio-Listen	Music-Play
+我要 听 一会儿 陈呈 的 I 的 星空 秀 在 FM95 点 5	7	5	Radio-Listen	Music-Play
+请 立即 播放 三好 坏男孩	7	5	Radio-Listen	Music-Play
+我要 听 袁博 的 非常 太 好听	7	5	Radio-Listen	Music-Play
+我要 听 与 荒野 里面 的 多嘴 呢	7	5	Radio-Listen	Music-Play
+帮 我 调到 齐麟 的 中国 歌曲 排行榜	7	5	Radio-Listen	Music-Play
+找个 现在 放 英文 歌儿 的 电台	7	5	Radio-Listen	Music-Play
+听 财智 讲堂 的 重播 在 上海 第一 财经频道 呢	7	8	Radio-Listen	TVProgram-Play
+回看 CCTV3 综艺 频道 的 向 幸福 出发 - 2021 - 18 五一 二 护士节	7	8	Radio-Listen	TVProgram-Play
+现在 是 7 点 给 找 旅游 早班车	7	9	Radio-Listen	Travel-Query
+给 我 拨 到 冯岩 的 红绿灯	7	9	Radio-Listen	Travel-Query
+号码 幺 五九 三三零 八三 零 五八 的 归属 地是 哪里	7	9	Radio-Listen	Travel-Query
+山东 文旅频 的 直播 乐拍 电视 购物 一会儿 播放 下	7	10	Radio-Listen	Video-Play
+请查 兰州 孔亮 火锅 农民 巷店	7	11	Radio-Listen	Weather-Query

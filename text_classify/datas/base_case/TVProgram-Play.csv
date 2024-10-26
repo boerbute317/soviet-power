@@ -1,0 +1,26 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+我 想 回 看 凌晨 两点 的 新闻 大 求真	8	0	TVProgram-Play	Alarm-Update
+有声 小说 竞技 女孩 给 我播 一下	8	1	TVProgram-Play	Audio-Play
+有声 小说 斗罗 大陆 给 我播 一下	8	1	TVProgram-Play	Audio-Play
+帮 我 打开 贵州 公共 吧 ， 看看 现在 播放 什么 电视剧	8	3	TVProgram-Play	FilmTele-Play
+我 想 看 山西 公共 的 早间 咨迅 帮 我 找 一下	8	3	TVProgram-Play	FilmTele-Play
+养生 有道 播放 一下	8	3	TVProgram-Play	FilmTele-Play
+请 帮 我 转到 山东 农科 查看 看 现在 播放 的 一切 为了 群众	8	3	TVProgram-Play	FilmTele-Play
+今天 的 新闻 说报 是不是 已经 过 了 播放 时间 了 帮 我 看 下	8	3	TVProgram-Play	FilmTele-Play
+导演 解读 看 这部 电视剧 弥补 历史 知识 的 不足	8	3	TVProgram-Play	FilmTele-Play
+早上 播放 过 的 红娘子 在 哪个 播放 的 帮 我 看 下	8	3	TVProgram-Play	FilmTele-Play
+想 看 寰宇 地理 ， 帮 我 打开 科教 健康 吧	8	4	TVProgram-Play	HomeAppliance-Control
+回放 贵州 新闻联播 昨晚 内容	8	7	TVProgram-Play	Radio-Listen
+云南 新闻联播 十点钟 就 结束 了 吗 我 还 想 看看	8	7	TVProgram-Play	Radio-Listen
+调 到 河南 卫视 看看 河南 新闻联播 可以 吗 我 想 看 下	8	7	TVProgram-Play	Radio-Listen
+12 点 了 看 会儿 午间 新闻 吧	8	7	TVProgram-Play	Radio-Listen
+我 想 看 下 陕西 二套 今早 的 都市快报 早间 版	8	7	TVProgram-Play	Radio-Listen
+重温 周四 的 经济 焦点	8	7	TVProgram-Play	Radio-Listen
+回放 上 个 礼拜三 的 江苏 教育 新闻 。	8	7	TVProgram-Play	Radio-Listen
+我 儿子 要 看 猪猪 侠 之 深海 小 英雄 帮 我 调到 那	8	7	TVProgram-Play	Radio-Listen
+CCTV7 国防 军事 频道 5 月 20 的 视频 查询 一下 有 哪些 节目	8	10	TVProgram-Play	Video-Play
+下午 12 点 55 分 的 非诚 勿扰 开播 了 吗 帮 我 看 下	8	10	TVProgram-Play	Video-Play
+乐思 购物 直播 节目 是 在 今天 十八点 播放 吗 帮 我 看 下	8	10	TVProgram-Play	Video-Play
+帮 我 查找 一下 CCTV1 的 动物 世界 - 2021 - 103	8	10	TVProgram-Play	Video-Play
+搜索 社会 与 法 频道 播出 的 法律 大讲堂 往期 视频	8	10	TVProgram-Play	Video-Play
+帮 我 打开 南昌 精品 房产 吧 ， 想 了解 今天 的 房产信息	8	11	TVProgram-Play	Weather-Query

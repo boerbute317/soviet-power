@@ -1,0 +1,538 @@
+命名实体识别
+    功能/需求: 从给定的文本中，抽取出业务关注的实体对象
+    应用场景：
+        搜索：
+            -1. 用户给定了一段文本query进行搜索
+            -2. query的处理逻辑/query理解逻辑：
+                --2.1 分词、词性标注、命名实体识别、关系抽取、意图识别.....
+                --2.2 分词：基础 + 可以词语的组合进行关键词的匹配(可以结合词性....)
+                --2.3 意图识别 + 命名实体识别 + 关系抽取： 进行精准信息的匹配
+                    意图识别：对query进行分类，比如类别包括：属性的查询、汇率的转换、度量单位转换、其它查询
+                        属性的查询：
+                            命名实体识别：主体、属性类型
+                            关系抽取：
+                                不太需要 --> 命名实体识别 + 意图识别 + 单主体/单属性的要求(业务) 已经将实体之间的关系抽取出来了
+                                需要 ---> 针对多主体、多属性的情况考虑
+                            获取结果：
+                                如果提取出来对应的“实体-属性”信息，直接查询数据库即可
+                                如果没有提取出对应的实体-属性信息，那么直接走默认的(当前这个链路直接返回空)
+                            eg:
+                                成龙的妻子是谁 ---> 提出出实体"成龙", 获得当前query的需求是判断关系"妻子"
+                        汇率的转换：
+                            命名实体识别：源汇率类型、目标汇率类型、源汇率金额、目标汇率的金额
+                        度量单位转换：
+                            命名实体识别：源单位、目标单位、源度量值、目标度量值、度量类型
+                        其它查询 + 特殊查询链路走不通：
+                            分词 + 关键词匹配 + 语义匹配.....
+            -3. 基于query的处理结果，从海量的原始数据中获取数据/匹配数据，得到候选网页/结果的列表
+            -4. 将候选的结果列表进行排序(可以参考query以及当前用户的历史行为)，最终返回Top K显示在页面上
+        聊天机器人/智能客服/智能辅助诊断系统:
+            NOTE: 特点领域的聊天机器人，eg: 金融、医疗....
+            -1. 用户给定一个question问题文本
+            -2. question文本分析/理解
+                eg:
+                    a. 我的信用卡还有多久过期?
+                    b. 信用卡什么时候过期?
+                    c. 信用卡过期了吗?
+                    d. 我这期需要还多少钱?
+                    e. 我这期的账单是多少?
+            -3. 获取最匹配的answer结果返回显示即可
+            NOTE:
+                智能辅助诊断系统:
+                    如何辅助诊断?
+                        CV: 能够自动的针对CT、B超、X光等"照片"进行自动的预测判断是否患病(正常/患病(疾病1、疾病2、.... + 患病位置))
+                        NLP: 类似聊天机器人/搜索
+                            医生输入病人的查体信息(文本类型的), 模型从查体信息中获取症状、疾病历史等信息，结合关系抽取的结果，从数据库直接匹配结果即可
+                                eg:
+                                    病症A + 病症B --查询得到--> 检查方式1
+                                    检查方式1 ---检查 + 分析---> 检查结论A
+                                    病症A + 病症B + 检查结论A + 其它检查结论B --> 疾病类型A
+                                    疾病类别A + 疾病历史 ----> 治疗方式
+        NOTE:
+            和关系抽取一起使用
+                a. 从文本中抽取出实体，并且构建实体与实体之间的关系，最终将实体和关系保存到图数据库中 --》 构造知识图谱
+                b. 知识图谱的应用：
+                    -1-. 风控：构建企业、老板、借贷、逾期、还款、纠纷、合同等等之间的关系，从而在发生借贷关系的时候，进行风控的评定
+                    -2-. 故障检测：可以将故障、故障的表现、故障的解决方案等实体之间构建关系，从而自动化的进行故障检测；当设备出现什么症状表现的时候，可以直接查库得到可能的故障以及对应的解决方案
+                    -3-. 智能医疗辅助系统/网上自助医疗诊断系统：从医院的诊疗记录中抽取出病症的表现的，病症的名称，病症的解决办法以及可能存在的后续病症等实体，构建实体与实体之间的关系，保存到数据库即可；直接基于病人的表征体现定位可能的疾病，从而得到需要的诊疗方案(如何检查、如何治疗<药品、手术、注意事项>)
+                    -4- 聊天机器人/智能客服/语音的智能客服：针对特定领域构造智能的客服
+                        意图识别 + 命名实体识别 + slot槽位设计
+                        -a-. 针对用户的问题，判断对应的意图，当前流程仅处理特定意图
+                        -b-. 对特定意图的场景进行分析，判断当前意图可能存在的实体信息,结合业务设计槽位，最后基于槽位信息进行业务数据的逻辑处理
+                        NOTE: 针对用户的问题，进行意图识别，然后根据需要提取对应的实体，并按照对应的格式槽位进行填充
+                        比如：
+                            交通车票查询的槽位设计案例：A日期从B到C的D票还有没有?
+                                系统就需要从文本中提取出A日期、B起始地点、C目的地、D交通方式
+                                eg:
+                                    从上海去张家界的火车票明天还有吗？
+                                    买一张明天上海开出的到张家界的火车票
+                                    买一张明天到张家界的火车票
+                                判断的实体结果: 上海 --> 起始地点
+                                                张家界 --> 目的地
+                                                火车 --> 交通方式
+                                                明天 --> 日期
+                                            NOTE: 代码逻辑上再对实体进行转换处理,比如日期明天转换为具体日期
+                            eg:
+                                问句1: 还款日期是几号?
+                                问句2: 最迟可以时候还款?
+=========================================================================================
+命名实体识别实现方式:
+    实现方式一: 序列标注任务/Token分类模型
+        NOTE: 针对每个token进行预测，判断每个token属于的类别
+        NOTE:
+            方式1: 针对每个Token预测BMESO/BISO类型信息
+                eg:
+                    x: 湖 南 张 家 界 的 美 食 有 什 么
+                    y: B-LOC M-LOC M-LOC M-LOC E-LOC O O O O O O
+                    note：预测类别数目就是 1 + 4 * name_entity_class_number
+                note: 这种方式不适合实体嵌套的场景
+                    {
+                        'token': ['湖', '南', '张', '家', '界', '的', '美', '食', '有', '什', '么'],
+                        'span': [
+                            {'type': 'Loc', 'start': 0, 'end': 1},
+                            {'type': 'Loc', 'start': 2, 'end': 4},
+                            {'type': 'Loc', 'start': 0, 'end': 4},
+                            {'type': 'Attr', 'start': 6, 'end': 7}
+                        ]
+
+                    }
+                模型结构：
+                    Token Embedding + Token Classify
+                    Token Embedding可以选择：
+                        静态词向量: nn.Embedding
+                        动态词向量: ELMo(nn.Embedding+Bi-LSTM)、BERT、GPT、BERT+Bi-LSTM、GPT+LSTM....
+                    Token Classify可选选择:
+                        FC + Softmax    + argmax：针对每个token进行类别的判断(每个token独立判断属于 1+4*name_entity_class_number 个类别的中那一个类别)
+                        FC + CRF        + viterbi: 在Softmax的基础上考虑类别与类别之间的转换关系来最终决定每个token对应的预测类别
+            方式2: 针对每个Token预测对象的类别信息(指针网络&片段网络)
+                eg:
+                    token   是否是实体开头  是否是实体结尾 是否属于实体1 是否属于实体2 是否属于实体3 .... 是否属于实体n
+                    湖       1               0           1           0     ...
+                    南       0               1           1           0     ...
+                    张       1               0           1           0     ...
+                    家       0               0           1           0     ...
+                    界       0               1           1           0     ...
+                    的       0               0           0           0     ...
+                    美       1               0           0           1     ...
+                    食       0               1           0           1     ...
+                    有       0               0           0           0     ...
+                    什       0               0           0           0     ...
+                    么       0               0           0           0     ...
+
+                    token   是否是实体开头  是否是实体结尾 是否14：属于实体1/地址 是否属于实体2/公司
+                    广           1           0               1               1
+                    东           0           1               1               1
+                    西           0           0               0               1
+                    果           0           0               0               1
+                    记           0           0               0               1
+                    农           0           0               0               1
+                    业           0           0               0               1
+                    发           0           0               0               1
+                    展           0           0               0               1
+                    有           0           0               0               1
+                    限           0           0               0               1
+                    公           0           0               0               1
+                    司           0           1               0               1
+                    具           0           0               0               0
+                    体           0           0               0               0
+                    地           0           0               0               0
+                    址           0           0               0               0
+                    是           0           0               0               0
+                    哪           0           0               0               0
+                    儿           0           0               0               0
+                模型结构：
+                    Token Embedding + Token Classify(多分支的)
+                    Token Embedding可以选择：
+                        静态词向量: nn.Embedding
+                        动态词向量: ELMo(nn.Embedding+Bi-LSTM)、BERT、GPT、BERT+Bi-LSTM、GPT+LSTM....
+                    Token Classify可选选择:
+                        FC + Softmax + argmax：针对每个token进行类别的判断(每个token独立判断属于 1+4*name_entity_class_number 个类别的中那一个类别)
+            方式3: 在分词的基础上，对分词的词语进行分类判断(是否属于实体，以及属于那一类实体)
+                湖南张家界的美食有什么 --调用其它模型分词--> 湖南  张家界  的  美食  有  什么
+                x(6个Token):     湖南  张家界   的   美食    有  什么
+                y(6个标签):       Loc  Loc     O    Attr   O   O
+    实现方式二：基于生成模型来实现命名识别
+        NOTE: 生成模型可以认为包含编码器 和 解码器
+        也就是将原始的token文本作为编码器的输入，将实体词列表作为解码器的输出
+        eg:
+            x: 湖南张家界的美食有什么
+            y: 地址实体:湖南[SEP]张家界[SEP]湖南张家界[SEP]
+            x: 广东西果记农业发展有限公司具体地址是哪儿
+            y: 地址实体:广东[SEP];机构实体:广东西果记农业发展有限公司[SEP]
+        模型结构：
+            encoder + decoder的大结构
+=========================================================================================
+医疗命名实体识别
+    代码：
+        https://github.com/Tongjilibo/bert4torch
+        git clone https://github.com/Tongjilibo/bert4torch.git
+        或者直接下载 zip 压缩包: https://github.com/Tongjilibo/bert4torch/archive/refs/heads/master.zip
+    代码结构：
+        数据处理、模型结构、训练、持久化、部署等等.....
+        数据处理：
+            分词/分字、Token2id
+            额外可能支持/处理的(数据增强):
+                -1. 针对实体位置的token直接替换成其它同类型的实体token
+                    eg: 还有从上海到长沙的高铁票吗?
+                        随机替换: 上海、长沙、高铁票
+                        -->
+                            还有从上海到北京的飞机票吗?
+                            还有从深圳到长沙的汽车票吗?
+                            还有从上海浦东到上海静安的飞机票吗?
+                            ......
+                -2. 针对每个token/字采用同形或者同音的字进行替换，或者替换成拼音或者替换成UNK
+                    eg: 还有从上海到长沙的高铁票吗?
+                        --->
+                            患有从上海到长沙的高铁票吗?
+                            huanyou从shagnhai到长沙的高铁票吗?
+                            上海到长沙的高铁
+        模型结构:
+            基本上比较通用: 语言模型 + 分类结构
+                语言模型:
+                    静态词向量: Word2Vec、nn.Embedding
+                    动态词向量: Bert、Bi-LSTM、GPT.....
+            常用算法比较分析:
+                Bert:
+                    论文: https://arxiv.org/pdf/1810.04805.pdf
+                    特殊Token:
+                        CLS、SEP、PAD、UNK、MASK
+                    主结构(默认/任一):
+                        1层embedding + 12层的Transformer Encoder结构(就是一种重复)
+                        embedding:
+                            输入：token id(word piece)、position id(绝对位置编码)、segment type id
+                                特殊: 添加特殊token: CLS、SEP
+                            输出：针对每个token存在一个向量，整个数据结构为: [N,T,E]
+                        Transformer Encoder:
+                            输入: [N,T,E]
+                            输出: [N,T,E]
+                            中间结构:
+                                多头self-attention: 头与头之间的独立的，所有头value提取后，再经过一个全连接进行特征交叉融合
+                                残差
+                                LayerNorm
+                                FFN: 维度的扩展压缩
+                                残差
+                                LayerNorm
+                    训练/预训练方式:
+                        预测token + 预测文本的类别
+                            预测token: 针对文本中的token进行随机mask处理，针对随机mask的token进行预测(15%的随机mask -> 80%随机mask丢弃、10%随机替换成其它token、10%保持原样)
+                                目的：是为了让最终每个token的输出特征向量都是能够比较好的表达当前token的语义信息的
+                            预测文本的类别: 直接提取[CLS]这个特殊token对应的特征向量，进行分类训练
+                                目的: 是为了让CLS的特征能够体现整个文本的特征
+                    迁移：
+                        1. 使用bert输出的每个token的特征向量进行后续处理
+                        2. 使用CLS这个特殊token对应的特征向量进行后续处理
+                AlBert:
+                    论文: https://arxiv.org/pdf/1909.11942.pdf
+                    特殊Token: 基本同Bert
+                    主结构(默认/任一): 基本同Bert
+                        区别如下:
+                            1. Embedding到第一个Transformer Encoder之间存在一个全连接，作用是将:
+                                [N,T,V] --全连接--> [N,T,E]   : V << E
+                                为了减少embedding部分的参数
+                            2. 不同层的Transformer Encoder之间进行参数共享
+                    训练/预训练方式: 基本同Bert
+                        区别如下:
+                            1. 只有MLM的训练(Mask预测token的训练)
+                            2. 增加训练数据、增加训练的epoch
+                T5:
+                    论文: https://arxiv.org/abs/1910.10683
+                    特殊Token: PAD、UNK、EOS
+                    主结构(默认/任一):
+                        Transformer Encoder + Transformer Decoder结构
+                        内部增加了一个相对位置编码
+                        FFN中间的激活函数采用门结构
+                        相比于Bert结构来讲，Transformer Layer中，LN(Layer-Norm)放到Attention前面
+                    训练/预训练方式:
+                        数据生成(给定编码器的输入，输出解码器的结果)
+                    迁移：
+                        1. 单独迁移encoder部分(作为语言模型的基础，一般用于分类、命名实体识别之类任务的前置网络)
+                        2. 迁移encoder + decoder部分，作为文本生成领域的基础模型
+                roberta：
+                    论文: https://arxiv.org/pdf/1907.11692.pdf
+                    特殊Token: 同Bert
+                    主结构(默认/任一)：同Bert
+                    训练：
+                        1. 采用更多的训练数据
+                        2. 采用动态Mask机制
+                            Bert中，针对一条样本随机选择15%的位置进行mask处理，在接下来的n个epoch中，当前样本都是一样(mask的位置是一样的)
+                            RoBERTa: 针对一样样本而言，会在每个批次数据加载的时候，进行随机mask处理，所以在接下来的n个epoch中，相当于都是不同的样本数据
+                        3. NSP --> FULL-SENTENCES (不采用NSP损失，单纯仅使用MLM Loss；尽量长的输入数据(尽量输入的是一个完整的文本序列，而不是单一句子，只要求不要超过最大长度))
+                        4. 使用更大的批次
+                        5. Text编码预处理的使用采用BPE Token分词处理
+                            BPE: Byte-Pair Encoding
+                            BBPE: Byte-level BPE
+                            常规: 分词、分字、笔画、偏旁部首、Word Piece、sub-word
+                    迁移：
+                        同bert
+                DeBERTa:
+                    论文：https://arxiv.org/abs/2006.03654
+                    特殊token：CLS、SEP、PAD、UNK、MASK
+                    主结构(默认/任一)：基本同Bert结构，区别如下:
+                        -1. 在特征提取过程中，增加了相对位置编码, 在Self-Attention计算过程中增加
+                            Bert中仅加入了绝对位置编码信息
+                                eg： 我 爱 我 的 妈 妈
+                    训练：
+                        随机15%的Mask
+        训练:
+            优化器(SGD、Adam、AdamW)
+            学习率(一般整体来讲，学习率越来越小最好; 在模型迁移微调的时候，可以考虑在前面的1%~5%左右的批次中，使用warmup学习率变化规律)
+            批次大小(一般情况下，可以一直保持一个批次大小值，但是有的时候可以尝试一下随着训练的递进，批次越来越大；在模型迁移微调 + warmup的时候，可以考虑在warmup学习率变大的过程中，增大批次<减小异常数据对模型的影响>)
+        持久化+部署:
+            省略
+    模型训练:
+        note:
+            linux操作命令:
+                https://m.baidu.com/sf?pd=topone_multi&atn=index&word=linux%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4&lid=15975653975898783410&key=cMKl%2BhGxKk9hkX3NleoqMPd%2F1vZjiFL9DzIyKQ5Ab8bBqU2kJJOfcbwuk6atigicZ6n10pukilhTy3hE7pg4Tv%2BfmBFxxbZyRgNEwaJftZkYaMTDmT%2BaiChxyqqYeMXe&top=%7B%22sfhs%22%3A1%7D&type=bpage
+                https://www.runoob.com/linux/linux-command-manual.html
+        本地代码的编写，运行测试完成
+        服务器模型训练：
+            -1. 找一台服务器Linux环境
+            -2. 如果linux服务器上没有安装python环境，建议通过miniconda来安装
+                wget https://repo.anaconda.com/miniconda/Miniconda3-py310_24.1.2-0-Linux-x86_64.sh
+                sh Miniconda3-py310_24.1.2-0-Linux-x86_64.sh  # 仅选择好安装目录，其它的均输入Y(选择默认值)
+                # 推出shell窗口，重新打开一个连接窗口
+                conda create -n default python=3.10
+                conda activate default
+            -3. 在对应的python环境中安装模型训练依赖的相关库
+                pip install torch==1.13.1 torch4keras
+            -4. 将代码通过WinScp上次到linux服务器上(选择一个linux上的路径)
+            -5. check/update相关的配置信息，然后直接通过python命令启动训练代码
+                python task_medical_ner_ner_crf_v0.py
+        通过一些机器学习平台来训练模型:
+            -1. 采用阿里云的PAI平台进行模型训练，使用阿里云的DSW来进行建模
+                https://pai.console.aliyun.com/?regionId=cn-hangzhou#/workspace/overview
+                https://pai.console.aliyun.com/?regionId=cn-hangzhou&workspaceId=47899#/notebook?pageNumber=1&pageSize=10&resourceId=ALL&sortBy=GmtCreateTime&order=DESC
+            -2. DSW就是类似你操作的jupyterlab的页面/类似Linux的服务器来操作
+            -3. 在对应的python环境中安装模型训练依赖的相关库
+                pip install torch4keras
+            -4. 编写代码或者将代码上次到DSW对应的服务器上
+            -5. check/update相关的配置信息，然后直接通过python命令启动训练代码
+                nohup python task_medical_ner_ner_crf_v0.py &
+    模型部署(针对任何模型的/任何业务的)
+        步骤：
+            1. 在本地/PyCharm开发工具中，编写并测试通过模型的推理过程
+            2. 根据不同的部署方式，采用不同的操作
+            基于Flask的裸服务器部署:
+                NOTE:
+                    一般情况，模型部署一般都在linux服务器，也就是一个linux的操作系统
+                    一般情况下，公司是有服务器的，服务器对于我们来讲，会提供IP地址、端口号、连接的用户名&密码
+                    针对提供SSH连接的服务器，可以通过SSH的客户端进行连接
+                        WinScp: https://winscp.net/eng/index.php
+                        putty: http://www.putty.wang/
+                a. 本地编写Flask的接口代码
+                b. 编写启动代码，并完成本地测试
+                c. 将所有编写好的代码全部copy到服务器上，并将相关环境也安装好
+                    安装python环境 同上述训练过程
+                d. 通过python命令启动flask的后端接口
+            基于第三方的机器学习部署平台进行部署:
+                eg: 阿里云的EAS、AWS的Sagemaker
+                以EAS为例
+                    https://help.aliyun.com/zh/pai/user-guide/eas-model-serving/?spm=5176.pai-console-inland.help.dexternal.32de642d1ofCVZ
+                    https://help.aliyun.com/zh/pai/user-guide/develop-custom-processors-by-using-python?spm=a2c4g.11186623.0.i8
+                    https://help.aliyun.com/zh/pai/user-guide/sdk-for-python?spm=a2c4g.11186623.0.i18
+                a. 编写PAI EAS的入口代码文件: pai_app.py
+                b. 将代码/模型上传到oss上，要求文件的存储结构如下:
+                    xxxxx/                  根文件夹
+                    xxxxx/code              保存所有相关的代码(PAI会自动将这个文件夹添加到sys.path中)
+                    xxxxx/models            保存所有的模型文件
+                c. PAI-EAS进行部署
+{
+    "metadata": {
+        "name": "medical_ner",
+        "instance": 1
+    },
+    "cloud": {
+        "computing": {
+            "instance_type": null,
+            "instances": [
+                {
+                    "type": "ecs.c8i.xlarge",
+                    "spot_price_limit": 0.2
+                }
+            ],
+            "disable_spot_protection_period": false
+        }
+    },
+    "storage": [
+        {
+            "oss": {
+                "path": "oss://ai-shenzhen/deploy/medical_ner/202406231537/models/",
+                "readOnly": true
+            },
+            "properties": {
+                "resource_type": "model"
+            },
+            "mount_path": "/mnt/ner/models"
+        },
+        {
+            "oss": {
+                "path": "oss://ai-shenzhen/deploy/medical_ner/202406231537/code/",
+                "readOnly": true
+            },
+            "properties": {
+                "resource_type": "code"
+            },
+            "mount_path": "/mnt/ner/code"
+        }
+    ],
+    "containers": [
+        {
+            "image": "eas-registry-vpc.cn-shenzhen.cr.aliyuncs.com/pai-eas/pytorch-inference:1.12-py39-cpu-ubuntu2004",
+            "env": [
+                {
+                    "name": "MEDICAL_NER_MODEL_DIR",
+                    "value": "/mnt/ner/models"
+                },
+                {
+                    "name": "PAI_ENDPOINT",
+                    "value": "0.0.0.0:8000"
+                }
+            ],
+            "script": "python /mnt/ner/code/medical_ner/deploy/pai_app.py",
+            "port": 8000,
+            "prepare": {
+                "pythonRequirements": [
+                    "torch4keras"
+                ]
+            }
+        }
+    ]
+}
+                d. 测试
+                    d.1 页面测试
+                    d.2 页面压力测试
+                    d.3 服务区通过curl来测试
+                        curl http://1757826125271350.cn-shenzhen.pai-eas.aliyuncs.com/api/predict/medical_ner -H 'Authorization: MzdjNzhmMGNkMGQ4NzRkYWYzYWQxMTIwYjE4ZTBiYjljYTY4Y2E4Yg==' -d '我是小明'
+                    d.4 客户端调用
+                        pip install eas-prediction
+
+            基于Flask Web框架 + Docker进行容器部署:
+                NOTE: 前提条件是Flask Web API已经完成开发，并且能够进行部署(裸服务器部署)
+                Docker: 简单理解来讲，Docker就是一种比较方便进行部署、运维管理的软件
+                    image/镜像: 理解成一个包含某些特定服务的小的操作系统文件
+                    container/容器：如果将一个镜像在docker中运行，那么最终就形成一个容器(独立存在裸服务器中)
+                    镜像仓库: 保存构建好的镜像
+                Docker部署的相关步骤:
+                    -1. 相关API代码的编写(eg: Flask Web API....)，会通过git来进行代码管理
+                    -2. 构建镜像(告诉"软件"如何build一个新的镜像)
+                        也就是将小的操作系统"文件"(也就是一个已经存在的镜像文件) + 当前的模型文件/代码文件 + 依赖库 + ... 全部整合到一起，形成一个image镜像
+                    -3. 将镜像上传到镜像仓库
+                    -4. 从运行服务器上执行镜像的拉取 + 镜像的运行命令(告诉服务器如何执行新的镜像)
+                        镜像的拉取: 从镜像仓库将对应的镜像文件拉到服务器本地
+                        镜像的运行: 运行本地镜像，形成了一个容器
+                    NOTE: 在企业里面我们一般会通过一些运维/部署的软件来简化上述过程，eg:jenkins、开源的代码管理工具(gitee、gitlab、...)
+                参考：
+                    https://dockerdocs.cn/
+                    https://www.runoob.com/docker/ubuntu-docker-install.html
+                    https://dockerdocs.cn/docker-for-windows/install/index.html
+                    https://hub.docker.com/
+                Docker相关命令:
+                    安装：(建议弄一台Linux服务器来实现一下)
+                        ecs.e-c1m2.2xlarge 8核16G ubuntu18.04
+                        参考:
+                            https://www.runoob.com/docker/ubuntu-docker-install.html ubuntu18.04操作系统安装
+                        安装命令:
+                            apt-get update
+                            apt-get install apt-transport-https  ca-certificates  curl  gnupg-agent  software-properties-common
+                            curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+                            apt-key fingerprint 0EBFCD88
+                            sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/ focal stable"
+                            apt-get update
+                            apt-get install docker-ce docker-ce-cli containerd.io
+                            apt-cache madison docker-ce
+                            apt-get install docker-ce=5:20.10.6~3-0~ubuntu-focal docker-ce-cli=5:20.10.6~3-0~ubuntu-focal containerd.io
+                            docker
+                            docker run hello-world
+                            service docker status
+                Docker容器镜像操作：
+                    NOTE:
+                        需要一个保存镜像的网址/镜像仓库:
+                            https://hub.docker.com/
+                            容器镜像服务ACR: https://cr.console.aliyun.com/cn-hongkong/instances
+                            阿里云镜像加速: https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+                        docker相关命令: https://www.runoob.com/docker/docker-command-manual.html
+                        自行设定镜像仓库的密码: https://cr.console.aliyun.com/cn-hangzhou/instance/credentials
+                    登录:
+                        docker login --username=1941046624@qq.com registry.cn-hangzhou.aliyuncs.com
+                        docker login --username=1941046624@qq.com registry-vpc.cn-hangzhou.aliyuncs.com
+                    搜索镜像:
+                        docker search ubuntu
+                        https://hub.docker.com/
+                    拉取基础镜像
+                        docker pull ubuntu:18.04
+                        docker image ls
+                        docker container ls -a
+                    运行镜像，形成容器:
+                        docker run -ti ubuntu:18.04 /bin/bash
+                        run命令会进入docker容器内部，在容器内部就相当在一个操作系统里面，你可以在操作系统内进行你想操作的任何内容， exit就是推出镜像
+                        NOTE:
+                            角色1: 主机 --> 执行docker命令的服务器
+                            角色2: 容器 --> docker启动的镜像形成的容器
+                    在当前容器内，进行环境的安装搭建:
+                        cd /mnt
+                        apt-get update
+                        apt-get install wget
+                        wget https://repo.anaconda.com/miniconda/Miniconda3-py310_24.1.2-0-Linux-x86_64.sh
+                        sh Miniconda3-py310_24.1.2-0-Linux-x86_64.sh  # 仅选择好安装目录，其它的均输入Y(选择默认值)
+                        miniconda3/bin/pip install torch==1.13.1 torch4keras -i http://mirrors.cloud.aliyuncs.com/pypi/simple/ --trusted-host mirrors.cloud.aliyuncs.com
+                        apt-get install vim
+                        vim /etc/profile
+                        # 输入 i 新增一行内容，新增后按ESC，然后按 :wq 保存推出
+                            export PATH="/mnt/miniconda3/bin:$PATH"
+                        source /etc/profile
+                        exit # 退出容器
+                    重启、重新进入容器内部、关闭:
+                        docker restart  83637f5ee78b
+                        docker exec -ti 83637f5ee78b /bin/bash
+                        docker stop 83637f5ee78b
+                    将容器转换为镜像，并且上传镜像
+                        docker commit 83637f5ee78b registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+                        docker push registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+
+                        docker commit 83637f5ee78b registry-vpc.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+                        docker push registry-vpc.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+                    在另外一台服务器上，安装好docker软件后，可以pull镜像运行
+                        docker pull registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+                        docker run -ti registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01 /bin/bash
+                    基于基础镜像 + 项目代码进行新的镜像build，并上传仓库
+                        # 1. 拉取基础进行，并进入容器内部
+                        docker pull registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01
+                        docker run -ti registry.cn-hangzhou.aliyuncs.com/gerry_ai/deploy_nlp:v20240624_01 /bin/bash
+                        # 2. 将相关的代码文件夹上传到宿主机
+                            通过WinSCP来上传文件夹即可
+                            ner/
+                            ner/ckpt: 保存模型文件
+                            ner/bert4torch: bert4torch相关库
+                            ner/medical_ner: 项目主要代码
+                            ner/flask_app_starter.py: 入口代码
+                        # 3. 将宿主机ner文件夹里面的所有内容全部copy到docker 容器内部
+                            docker cp ner 41bc54f8b9c6:/mnt
+                        # 4. 安装相关依赖库
+                            /mnt/miniconda3/bin/pip install flask six -i http://mirrors.cloud.aliyuncs.com/pypi/simple/ --trusted-host mirrors.cloud.aliyuncs.com
+                        # 5. 容器内部启动flask app检查是否能够正常启动
+                            export MEDICAL_NER_MODEL_DIR="/mnt/ner/ckpt"
+                            /mnt/miniconda3/bin/python /mnt/ner/flask_app_starter.py
+                        # 6. 将容器转换为新的镜像
+                            docker commit 41bc54f8b9c6 registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01
+                        # 7. 启动镜像查看是否能够正常启动
+                            docker run -d -p 9001:9001 -e "MEDICAL_NER_MODEL_DIR=/mnt/ner/ckpt" -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01 /mnt/miniconda3/bin/python /mnt/ner/flask_app_starter.py
+                           docker logs -f 41bc54f8b9c6
+                        # 8. 将完整的镜像直接推到仓库中
+                            docker push registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01
+                        # 9. 任意找一台部署的机器
+                            docker pull registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01
+                            docker run -d -p 9001:9001 -e "MEDICAL_NER_MODEL_DIR=/mnt/ner/ckpt" -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01 /mnt/miniconda3/bin/python /mnt/ner/flask_app_starter.py
+                            docker run -d -p 9002:9001 -e "MEDICAL_NER_MODEL_DIR=/mnt/ner/ckpt" -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_01 /mnt/miniconda3/bin/python /mnt/ner/flask_app_starter.py
+                    Dockerfile文件：
+                        将build image相关的操作放到一个文件中，通过命令就可以build image
+                            docker build -t name:tag .
+                        基于Dockerfile进行image build、上传、部署:
+                            1. 编写Dockerfile文件
+                                projects/NamedEntityRecognition/docker/medical_ner_docker/Dockerfile
+                            2. 将Dockerfile文件以及项目代码全部上传到linux服务器(镜像打包的服务器)
+                                docker build -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_02 .
+                            3. 构建好的镜像上传到仓库
+                                docker push registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_02
+                            4. 在任何一个其它的服务器上，执行一下命令即可启动容器
+                                docker run -d -P -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_02
+                                docker run -d -p 9001:9001 -t registry.cn-hangzhou.aliyuncs.com/gerry_ai/medical_ner:v20240626_02

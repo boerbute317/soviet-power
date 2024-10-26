@@ -1,0 +1,44 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+宝儿 攻美 推 首张 英语 大碟 发高烧 取消 表演 图	5	0	Music-Play	Alarm-Update
+想 听 封刀 不为 峥嵘 了 ， 要 漆 柚 唱 的 那版	5	3	Music-Play	FilmTele-Play
+放 一首歌 儿 ， 就 我爱你 塞北 的 雪 吧	5	3	Music-Play	FilmTele-Play
+相信 我终 有 一天 我会 让 你 死 得 很 难看	5	3	Music-Play	FilmTele-Play
+来 一 首任 然 的 飞鸟 和 蝉	5	3	Music-Play	FilmTele-Play
+给 我 播放 五月天 的 温柔	5	3	Music-Play	FilmTele-Play
+难过 ， 想 听 再见 吧 我 最 爱 的 你 里 的 歌	5	3	Music-Play	FilmTele-Play
+请 播放 吴涤 清版 的 《 梅兰 梅兰 我爱你 》	5	3	Music-Play	FilmTele-Play
+周深版 的 达拉 崩 吧 给 我 播放 一下	5	3	Music-Play	FilmTele-Play
+播放 任同祥 吹奏 的 李二嫂 改嫁	5	3	Music-Play	FilmTele-Play
+继续 播放 昨天 听 的 披头士 的 乡村音乐	5	3	Music-Play	FilmTele-Play
+说 唱歌曲 空壳 播放	5	3	Music-Play	FilmTele-Play
+播放 张卫 的 机器 铃 砍 菜刀	5	3	Music-Play	FilmTele-Play
+放 苏打 绿 的 我 好想你	5	3	Music-Play	FilmTele-Play
+帮 我 找 蔡 徐坤 的 情人	5	3	Music-Play	FilmTele-Play
+帮 我 播放 90 年代 的 摇滚音乐	5	3	Music-Play	FilmTele-Play
+我 想 听 张信哲 的 过火	5	3	Music-Play	FilmTele-Play
+我 想 听 徐远书 唱 的 念旧 。	5	3	Music-Play	FilmTele-Play
+播放 《 潇洒走 一回 》 ， 叶倩文 唱 的 啊	5	3	Music-Play	FilmTele-Play
+快 帮 我 播放 一下 江湖 流 啊 要 反复 唱	5	3	Music-Play	FilmTele-Play
+传 袁立 徐威 相识 于 一九九三年	5	3	Music-Play	FilmTele-Play
+放 白居易 的 长 相思 来 给 我 听	5	3	Music-Play	FilmTele-Play
+想 听 老狼 唱 的 同桌 的 你 了 ， 放 一下	5	3	Music-Play	FilmTele-Play
+二胡曲 子 二泉映月 来放 一下 吧	5	3	Music-Play	FilmTele-Play
+我 想 听任 同祥 的 唢呐 曲到 春来	5	3	Music-Play	FilmTele-Play
+我要 听 俄语 版 的 最后 的 一天	5	3	Music-Play	FilmTele-Play
+播放 李一桐 的 骊歌 行	5	3	Music-Play	FilmTele-Play
+我 想 听 任贤齐 的 春天 花会 开	5	3	Music-Play	FilmTele-Play
+播放 Beyond 的 海阔天空 。	5	3	Music-Play	FilmTele-Play
+播放 说 唱歌曲 慢热	5	3	Music-Play	FilmTele-Play
+给 小孩 播 骆宾王 的 咏 鹅	5	3	Music-Play	FilmTele-Play
+开始 播放 可可托海 的 牧羊人 ， 王琪 的	5	3	Music-Play	FilmTele-Play
+我 现在 要 听 唐家 三少 的 十二生肖 守护神	5	3	Music-Play	FilmTele-Play
+对不起 对不起 对不起 我 永远 都 欠 你	5	6	Music-Play	Other
+来 毛 不易 像 我 这样 的 人	5	6	Music-Play	Other
+给 我 找到 凉凉的 钢琴 版 播放	5	7	Music-Play	Radio-Listen
+你 能 给 我 放范丞丞 的 快乐 很 简单 吗	5	7	Music-Play	Radio-Listen
+放 一下 中国 广播 民族 乐团 的 埙 曲 秋风 词	5	7	Music-Play	Radio-Listen
+你 回答 的 牛头不对马嘴	5	9	Music-Play	Travel-Query
+我要 听 赵雷 的 成都 。	5	9	Music-Play	Travel-Query
+我想 听首 最新 的 摇滚乐 呢	5	10	Music-Play	Video-Play
+我要 听 李白 的 清平调	5	10	Music-Play	Video-Play
+下雨 了 现在 比较 适合 听 五月天 的 温柔	5	11	Music-Play	Weather-Query

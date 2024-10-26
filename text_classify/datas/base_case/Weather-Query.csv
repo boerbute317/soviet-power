@@ -1,0 +1,9 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+要 不要 穿 羽绒服 了 去 石家庄	11	0	Weather-Query	Alarm-Update
+北京 晚上 10 点能 下 小雪 吗	11	0	Weather-Query	Alarm-Update
+大后天 上海 会 很 热 吗	11	2	Weather-Query	Calendar-Query
+星期四 晚上 多云 ， 会 有 雨 吗	11	2	Weather-Query	Calendar-Query
+有人 说 北京 太 干燥 了 但 我 觉得 一点 问题 也 没有	11	4	Weather-Query	HomeAppliance-Control
+昨天 傍晚 的 火烧云 真的 太漂亮 了	11	6	Weather-Query	Other
+株洲 今天 阴转多云 吗	11	9	Weather-Query	Travel-Query
+桂林 室内空气 质量 良好 吗	11	9	Weather-Query	Travel-Query

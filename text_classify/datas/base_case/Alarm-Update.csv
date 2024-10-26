@@ -1,0 +1,16 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+一米 六五 的 女生 应该 找 多 高 的 男朋友 呢	0	2	Alarm-Update	Calendar-Query
+明天 的 时候 告知 我 准备 好 文具	0	2	Alarm-Update	Calendar-Query
+你 晚上 睡不着 的 时候 想 男人 吗	0	2	Alarm-Update	Calendar-Query
+你 能 明天 60 分钟 的 时候 叫 我 吗	0	2	Alarm-Update	Calendar-Query
+同时 他 还 指出 侵权 盗版 成为 中国 电影 发展 的 公害	0	3	Alarm-Update	FilmTele-Play
+提醒 我 周一 晚上 12 点 看 你好 ， 李焕英 电影 首映 。	0	3	Alarm-Update	FilmTele-Play
+给 别人 赠送 彩铃时 老 是 系统 繁忙	0	4	Alarm-Update	HomeAppliance-Control
+特别 是 晚上 睡觉 的 时候	0	6	Alarm-Update	Other
+4 月 20 号 10 点 给 小明 打电话	0	6	Alarm-Update	Other
+如果 你 真的 喜欢 我 那 今天 晚上 就 陪 我 一起 睡觉 吧	0	6	Alarm-Update	Other
+那 怎么 才能 从 本科 到 博士 只用 九年	0	9	Alarm-Update	Travel-Query
+请 在 11 分钟 后 叫 我 打 羽毛球	0	10	Alarm-Update	Video-Play
+立马 给 我 记 一下 今天 晚上 去 参加 唱歌 局	0	10	Alarm-Update	Video-Play
+在 防城 有没有 是 专门 卖 一些 比较 胖 的 初中生 穿 的 衣服 的 店 啊	0	11	Alarm-Update	Weather-Query
+只要 明天 的 天气 别 影响 割 麦子 就行	0	11	Alarm-Update	Weather-Query

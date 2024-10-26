@@ -1,0 +1,8 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+可以 算 一下 10 号 我 生日 是 周 几 吗	2	0	Calendar-Query	Alarm-Update
+世界 和 平日 是 在 几月份 ？	2	3	Calendar-Query	FilmTele-Play
+上周 4 是 多少 号	2	11	Calendar-Query	Weather-Query
+周五 是 中秋 吗	2	11	Calendar-Query	Weather-Query
+后天 是 周六 么	2	11	Calendar-Query	Weather-Query
+后天 去 上海 玩 是 周几来 着	2	11	Calendar-Query	Weather-Query
+明天 是 周几呀	2	11	Calendar-Query	Weather-Query

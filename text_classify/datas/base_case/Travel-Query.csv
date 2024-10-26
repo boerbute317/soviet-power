@@ -1,0 +1,14 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+闲得 吧 准确 消息 阿富汗	9	0	Travel-Query	Alarm-Update
+郑州 时政 啥时候 有 直通 政务 帮 我 看 下	9	2	Travel-Query	Calendar-Query
+到 贺州市 八步区 的 路 找 下	9	3	Travel-Query	FilmTele-Play
+你 可以 将 去 植物园 的 最 短路线 告诉 我 一下 吗	9	3	Travel-Query	FilmTele-Play
+我要 到 灌阳 给 我 找 下路	9	5	Travel-Query	Music-Play
+好像 咱们 五一 街右 拐 的 那条 路 好像 快到 了	9	6	Travel-Query	Other
+请 找到 去 水家湖 的 路	9	7	Travel-Query	Radio-Listen
+可以 帮 我 转到 河南 都市 的 孟子 约 吗 我 想 看 下	9	7	Travel-Query	Radio-Listen
+找下 到 壮锦 小学 的 路	9	10	Travel-Query	Video-Play
+找出 明天 挪威 去 冰岛 的 所有 航班信息 。	9	10	Travel-Query	Video-Play
+查询 到 南阳 一中 的 路	9	11	Travel-Query	Weather-Query
+搜 一下 太原 飞 长沙 的 机票价格 ？	9	11	Travel-Query	Weather-Query
+二零一 一年 七月 二 九日 两人 在 天津 南开区 民政局 领证 正式 结为 夫妻	9	11	Travel-Query	Weather-Query

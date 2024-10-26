@@ -1,0 +1,44 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+给 放 一下 第 20 集 法定 丈夫	3	0	FilmTele-Play	Alarm-Update
+章若楠 出演 的 如果 声音 不 记得 ， 我 现在 想 看	3	0	FilmTele-Play	Alarm-Update
+找 一下 陪 你 长大 的 第 30 集播 一下	3	0	FilmTele-Play	Alarm-Update
+李 光洁 微博 期待 山楂树 哭戏	3	0	FilmTele-Play	Alarm-Update
+广播剧 将进酒 帮 我 放 一下	3	1	FilmTele-Play	Audio-Play
+现在 续播 小说 假如 给 我 三天 时间 的 第三章	3	1	FilmTele-Play	Audio-Play
+播 一下 广播剧 破云 第一季	3	1	FilmTele-Play	Audio-Play
+现在 开始 请 循环 播放 一下 神笔 马良 这个 故事	3	1	FilmTele-Play	Audio-Play
+播放 量 最 多 的 悬疑 小说 可以 帮 我 找 一下 吗	3	1	FilmTele-Play	Audio-Play
+麻烦 给 我 播放 刘琮 和 杨天翔 合作 的 广播剧	3	1	FilmTele-Play	Audio-Play
+直到 今年 阿娇 才 在 多方 铺垫 下 回归 娱乐圈	3	2	FilmTele-Play	Calendar-Query
+找个 70 年代 的 武侠剧	3	5	FilmTele-Play	Music-Play
+播放 刘浩存 出演 的 送 你 一朵 小红花	3	5	FilmTele-Play	Music-Play
+甄子丹 刘德华 演 的 追龙 现在 给 我 放	3	5	FilmTele-Play	Music-Play
+快点儿 播放 适合 跳舞 的 冰河时代 啊	3	5	FilmTele-Play	Music-Play
+播放 九十年代 的 泰坦尼克号 ， 这到 现在 还 很 经典	3	5	FilmTele-Play	Music-Play
+胡歌 在 九十年代 之后 演 的 琅 琊 榜 搜 一下	3	5	FilmTele-Play	Music-Play
+有没有 三年 前 的 古装片 给 我 看 一个 呢	3	5	FilmTele-Play	Music-Play
+立刻 把 吴磊演 的 沙海 给 我 播放 一下 行不行	3	5	FilmTele-Play	Music-Play
+播 一下 激情 的 岁月	3	5	FilmTele-Play	Music-Play
+好 无聊 啊 ， 随便 给 我 推荐 放个 70 年代 的 武侠片	3	5	FilmTele-Play	Music-Play
+拥有 网络 博客 的 章子怡 表示 从来不 会 对 这些 八卦 消息 作 正面 回应	3	5	FilmTele-Play	Music-Play
+张国荣 的 港片 色情男女 播放 吧	3	5	FilmTele-Play	Music-Play
+不是 三十而立 我 想 看 的 是 三十 而已	3	6	FilmTele-Play	Other
+如果 一个 男 的 真的 爱 你	3	6	FilmTele-Play	Other
+放战天 狼 不是 战狼 赶紧 放战天 狼	3	6	FilmTele-Play	Other
+你 不要 乱 搜索 好不好 你 这个 笨蛋	3	6	FilmTele-Play	Other
+找到 金色 索玛花 播放	3	7	FilmTele-Play	Radio-Listen
+19 年 的话 那请 播放 反骗 天下	3	7	FilmTele-Play	Radio-Listen
+看 会儿 大唐 女 法医	3	7	FilmTele-Play	Radio-Listen
+南 都 娱乐 当时 周润发 片酬 很贵 吗	3	8	FilmTele-Play	TVProgram-Play
+来 一个 日本 动漫 名 侦探 柯南 呢	3	10	FilmTele-Play	Video-Play
+李一 从 神仙 的 宝座 跌落 凡尘 后 他 的 许多 明星 好友 也 纷纷 被 媒体 曝光	3	10	FilmTele-Play	Video-Play
+2014 年 的 大话西游 之仙履 奇缘 可以 播放 下 给 我 不	3	10	FilmTele-Play	Video-Play
+我 现在 要 看 乌鸦 小姐 与 蜥蜴 先生  	3	10	FilmTele-Play	Video-Play
+找到 并且 播放 何炅 和 黄磊 参加 过 的 向往 的 生活	3	10	FilmTele-Play	Video-Play
+请 帮 我 在 腾讯 视频 找到 邓超演 的 电影 乘风破浪	3	10	FilmTele-Play	Video-Play
+美国 片 啊 那 我 要 看 废柴 联盟	3	10	FilmTele-Play	Video-Play
+我 现在 要 看林 和平 导 的 远方 的 山楂树	3	10	FilmTele-Play	Video-Play
+给 我 找 张韶涵 参加 的 天赐 的 声音	3	10	FilmTele-Play	Video-Play
+李现 和 李一桐 演 的 剑 王朝 给 我 放下	3	10	FilmTele-Play	Video-Play
+能 看 没有 秘密 的 你 吧	3	11	FilmTele-Play	Weather-Query
+白马 探 出现 集 数名 与 名称	3	11	FilmTele-Play	Weather-Query

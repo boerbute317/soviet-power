@@ -1,0 +1,34 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+用 芒果 TV 看看 今天下午 三点 的 家常菜 节目	10	0	Video-Play	Alarm-Update
+我 侄女 想 看百 变小 樱	10	3	Video-Play	FilmTele-Play
+昨日 传出 消息 零六 西安 超女 韩真真 出家 了	10	3	Video-Play	FilmTele-Play
+极限 挑战 放 一下	10	3	Video-Play	FilmTele-Play
+日本 圣斗士 星矢 剧场版 播放 一下 吧	10	3	Video-Play	FilmTele-Play
+帮 我 播放 海贼王 的 第一集 我 是 路 飞 将要 成为 海贼王 的 男人	10	3	Video-Play	FilmTele-Play
+我要 听相声 我 是 歌手	10	3	Video-Play	FilmTele-Play
+那个 泰国 电视剧 双生 花 第二集 剧情 介绍 帮 我 播放 一下	10	3	Video-Play	FilmTele-Play
+给 我 播放 2018 年 上映 的 鸟瞰 世界 第一季 吧	10	3	Video-Play	FilmTele-Play
+给 我 接着 放 万圣 街 的 第 23 集 我 想 看	10	3	Video-Play	FilmTele-Play
+让 我们 看个 益智类 动画 啊	10	3	Video-Play	FilmTele-Play
+给 我 播放 中国 综艺 《 怦然心动 2 》 第一集	10	3	Video-Play	FilmTele-Play
+小猪 佩奇 给 儿子 放 一下	10	3	Video-Play	FilmTele-Play
+我 想要 看 朗朗 在 德国 音乐会 上 的 独奏	10	3	Video-Play	FilmTele-Play
+有 现在 在播 星际 公民 的 吧 个 找 个 看	10	3	Video-Play	FilmTele-Play
+猫 吃 鱼狗 吃 肉 奥特曼 打小 怪兽 嘿嘿	10	3	Video-Play	FilmTele-Play
+小猪 佩奇 是 美国 的 吗 播放 一下 看看	10	3	Video-Play	FilmTele-Play
+能否 帮 我 打开 今年 3 月 09 日 播放 的 这里 是 雅江 河谷 的 样子	10	4	Video-Play	HomeAppliance-Control
+给 我 随便 放个 动画片	10	5	Video-Play	Music-Play
+今天 播放 最火 的 瘦 脸操	10	5	Video-Play	Music-Play
+我要 看 法国 小提琴家 蒂博 演奏 的 小提琴曲	10	5	Video-Play	Music-Play
+通灵妃 的 有声 漫画 帮 我播 一下	10	6	Video-Play	Other
+文字 方面 以 日记 方式 让 大家 了解 其 生活 点滴	10	7	Video-Play	Radio-Listen
+快给我 放 下午 3 点 开始 的 女子双打 乒乓球赛	10	7	Video-Play	Radio-Listen
+看看 谢娜 主持 的 综艺	10	7	Video-Play	Radio-Listen
+我 想 看 广东 体育 的 体育赛事 帮 我 找 一下	10	7	Video-Play	Radio-Listen
+帮 我 打开 下 辽宁 经济 ， 我 想 了解 一下 今天 的 新闻	10	7	Video-Play	Radio-Listen
+今日 法国 有 什么 新闻 看 呢	10	7	Video-Play	Radio-Listen
+零点 已经 播出 的 顶级 赛事 - 围棋 回看 一下	10	8	Video-Play	TVProgram-Play
+放 今天 早上 刚 播出 的 斗破 苍穹 第三集	10	8	Video-Play	TVProgram-Play
+回放 广州 竞赛 今天 零点 的 体坛 点击 吧 我 想 看 下	10	8	Video-Play	TVProgram-Play
+回 放在 中央 5 套 播出 的 欧洲 篮球联赛	10	8	Video-Play	TVProgram-Play
+我 想 看 下去 年 在 成团 夜唱 的 BANG   BANG	10	9	Video-Play	Travel-Query

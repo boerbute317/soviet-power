@@ -1,0 +1,16 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+帮 我 打开 智能 闹钟 ， 然后 矫正 一下 时间 吧	4	0	HomeAppliance-Control	Alarm-Update
+晚上 睡觉 记得 把 电视 关 了 。	4	0	HomeAppliance-Control	Alarm-Update
+不好意思 手机 没 钱 罢工 了 有 机会 再聊	4	0	HomeAppliance-Control	Alarm-Update
+新一代 苹果 IPHONE 手机	4	0	HomeAppliance-Control	Alarm-Update
+多少 钱 一瓶 八四 消毒液	4	2	HomeAppliance-Control	Calendar-Query
+什么 是 简单 随机抽样 和 分类 抽样	4	2	HomeAppliance-Control	Calendar-Query
+三十二 寸 平板 高清 市场 售价 多少 钱 海信 新款 系列	4	3	HomeAppliance-Control	FilmTele-Play
+烟火 报警器 开 一下 。	4	3	HomeAppliance-Control	FilmTele-Play
+影音 厅 播放 唐 3	4	3	HomeAppliance-Control	FilmTele-Play
+给 我 开灯 这屋 的	4	3	HomeAppliance-Control	FilmTele-Play
+电风扇 风速 怎么 低 了 ， 帮 我 开大 一点 。	4	9	HomeAppliance-Control	Travel-Query
+怎么 去除 硫酸钠 中 混有 的 碳酸钠	4	9	HomeAppliance-Control	Travel-Query
+查看 一下 无线网 的 状态	4	9	HomeAppliance-Control	Travel-Query
+我要 和 男朋友 打 视频 电话 ， 开 下 电脑	4	10	HomeAppliance-Control	Video-Play
+气温 回暖 了 ， 不 用电 火炉 了 。	4	11	HomeAppliance-Control	Weather-Query

@@ -1,0 +1,40 @@
+分词后的文本	真实标签id	预测标签id	真实标签	预测标签
+以后 可能 会 好 也 不 一定	6	0	Other	Alarm-Update
+当然 这些 粉丝 是 需要 出场费 的 看来 小品 将 讽刺 箭头 直指 娱乐圈	6	1	Other	Audio-Play
+这个 笑话 不好 听 也 不好 笑	6	1	Other	Audio-Play
+感情 的 事 是 不能 强求 的	6	3	Other	FilmTele-Play
+李秉宪 木村拓哉 乔什 哈奈特 新片 海报 曝光 图	6	3	Other	FilmTele-Play
+四百 九十六 除 一百零二	6	3	Other	FilmTele-Play
+下周 一二九 号 影片 正式 开机	6	3	Other	FilmTele-Play
+有人 说 你 是 傻瓜 怎么办	6	3	Other	FilmTele-Play
+要 喊 的 我 在 宿舍 听得见 啊	6	3	Other	FilmTele-Play
+记者 获悉 央视 每年 的 购剧 数量 在 二 零零 零集 左右	6	3	Other	FilmTele-Play
+你 能 不能 发 你 相片 给 我	6	3	Other	FilmTele-Play
+估计 你 吃 不 着 菜 还 没 端上来 你 就 得 回去	6	3	Other	FilmTele-Play
+其中 某 一线 实力派 某 青年 大牌 一线 女 星等 均 在 黑名单 之 列	6	3	Other	FilmTele-Play
+有 第一次 就 会 有 第二次	6	3	Other	FilmTele-Play
+那 我 就 不 打扰 你 休息 了	6	4	Other	HomeAppliance-Control
+我 没有 钱 了 该 怎么办 呀 你 能 借 我 一点 吗	6	4	Other	HomeAppliance-Control
+他 也 跟 很多 现在 的 师兄弟 认识 了	6	4	Other	HomeAppliance-Control
+可以 告诉 我下 ， 蛋糕 还有 多久 烤 好 吗	6	4	Other	HomeAppliance-Control
+如果 演技 总是 受 批评 他 的 人气 迟早 回落	6	5	Other	Music-Play
+随后 黎明 与 乐基儿 杨千与 丁子 高 统统 都 被 网络 曝光 已婚 的 事实	6	5	Other	Music-Play
+我 老婆 现在 不 开心 了 怎么办	6	5	Other	Music-Play
+放 一首 表达 爱情 的 英文歌曲 呢	6	5	Other	Music-Play
+是不是 能 随机 来 一首 古典 乐 啊	6	5	Other	Music-Play
+适合 运动 的 歌曲 来 一首 吧	6	5	Other	Music-Play
+开始 播放 一首 关于 爱情 的 古典音乐 吧	6	5	Other	Music-Play
+而且 这次 的 组织 也 比较 成功	6	5	Other	Music-Play
+口碑 之下 该片 还 火速 走红 网络	6	5	Other	Music-Play
+谁 捡 到 瓶子 聊 会儿 天 呗	6	7	Other	Radio-Listen
+帮 我 找 一 找 我 老婆 的 电话 好 吗	6	7	Other	Radio-Listen
+经过 多 反面 的 慎重 删选 评委 名单 终于 正式 确定	6	7	Other	Radio-Listen
+演戏 的 时候 百分百 放 的 开 生活 中 又 是 极 平常 的 女子	6	7	Other	Radio-Listen
+改版 主要 体现 在 节目 结构 话语 体系 表现形式 等 方面	6	7	Other	Radio-Listen
+帮 我 打开 合肥 购物 看看 合肥 购物 正在 卖些 什么 东西	6	8	Other	TVProgram-Play
+怎么 没有 看到 我 下载 的 QQ 浏览器	6	9	Other	Travel-Query
+给 我 随便 找 一个 已经 完结 的 战斗 动漫	6	10	Other	Video-Play
+找个 经典 国漫 看	6	10	Other	Video-Play
+现在 山寨 版 春晚 已 得到 一些 商家 支持 比如 提供 场地 网络资源 等	6	10	Other	Video-Play
+没有 啊 你 想到 哪里 去 了 正 收拾 呢	6	11	Other	Weather-Query
+另外 英皇 还 承诺 全力 帮 他 力争 年底 的 香港 乐坛 最 受欢迎 男歌星 奖项	6	11	Other	Weather-Query
